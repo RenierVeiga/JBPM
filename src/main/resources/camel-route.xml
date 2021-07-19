@@ -1,0 +1,11 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+
+    <route id="processes">
+        <from uri="jbpm:events:process"/>
+        <filter>
+          <simple>${in.header.EventType} == 'beforeProcessStarted'</simple>
+          <to uri="jms:queue:ExternalSignalQueue"/>
+        </filter>
+    </route>
+
+</routes>
